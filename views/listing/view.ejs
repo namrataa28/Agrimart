@@ -1,0 +1,82 @@
+<% layout("/layout/boilerplate.ejs") %>
+<style>
+    body{
+        background-color: #eaeaea;
+    }
+.image{
+    object-fit: cover;
+    width: 100%;
+    height: 240px;
+}
+.container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.card{
+    background-color: #dbdbdb;
+    border: none;
+}
+.card{
+    margin-bottom: 15px;
+}
+.overlay {
+    position: absolute;
+    bottom: 150px;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: .5s ease;
+  }
+  
+  .effects:hover .overlay {
+    height: 10%;
+  }
+  .icon{
+      color: black;
+      font-size: larger;
+      margin-left: 5px;
+      background-color: white;
+      border-radius: 50%;
+      padding: 3px;
+  }
+   .link{
+    text-decoration: none ;
+    display: block;
+    color: black;
+  }
+</style>
+
+    <div class="row">
+        <div class="col-12">
+        <h1 class="text-center"><% products.category %></h1><hr>
+        </div>
+    </div>
+    <div class="container">
+    <!-- <div class="row"> -->
+        <% products.forEach(function(product){ %>
+        <div class="card" style="width: 18rem;">
+  <a href="/spices/<%= product._id %>" class="link">
+    <div class="effects">
+  <img src= "<%= product.image %>" class="card-img-top image" alt="...">
+  <div class="overlay">
+     <i class="fa-regular fa-heart icon"></i>
+     <i class="fa-solid fa-cart-shopping icon"></i>
+          </div>
+</div>
+  <div class="card-body">
+    <p class="card-text"><b><%= product.title %></b><br><%= product.quantity %> g</p>
+    
+    <div class="button" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    <p class="card-price" style="color: black;">&#8377;<%= product.price ? product.price.toLocaleString("en-IN") : "Price not available" %></p>
+    <button class="btn btn-outline-success add-cart">Add Cart</button>
+</div>
+  </div>
+</a>
+</div>
+        <% }) %>
+    <!-- </div> -->
+</div>

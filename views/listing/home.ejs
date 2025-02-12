@@ -1,0 +1,210 @@
+
+<% layout("/layout/boilerplate.ejs") %>
+<style>
+   
+
+</style>
+
+<body>
+   
+    <div class="container">
+        <div class="slide">
+           <% for(let image of all_image){ %>
+            <div class="item" style="background-image: url('<%= image.url %>') ;">
+                <div class="content">
+                    <div class="name"><%= image.title %></div>
+                    <div class="des"> <%= image.description %></div>
+                    <button class="button">Buy Products</button>
+                </div>
+            </div>
+        <% } %>
+        </div>
+
+        <div class="buttons">
+            <button class="prev"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="next"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div><br><br>
+    <h1 class="heading">Products</h1><hr>
+
+   <!-- spice -->
+    <div class="product-heading">
+        <h2 class="category">Spices</h2>
+        <a href="/products/spices" class="all-link">See all</a>
+    </div>
+   <div class="cards">
+    
+    <% for(let spices of spiceList.slice(0,5)){ %>
+    <div class="card" style="width: 18rem;">
+      <a href="/spices/<%= spices._id %>" style="text-decoration: none; display: block;">
+        <div class="effects">
+      <img src= "<%= spices.image %>" class="card-img-top image" alt="...">
+      <div class="overlay">
+         <i class="fa-regular fa-heart icon"></i>
+         <i class="fa-solid fa-cart-shopping icon"></i>
+              </div>
+    </div>
+      <div class="card-body">
+        <p class="card-text"><b><%= spices.title %></b><br><%= spices.quantity %> g</p>
+        
+        <div class="button" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+        <p class="card-price" style="color: black;">&#8377;<%= spices.price ? spices.price.toLocaleString("en-IN") : "Price not available" %></p>
+        <button class="btn btn-outline-success add-cart">Add Cart</button>
+    </div>
+      </div>
+    </a>
+    </div>
+ <% } %>
+</div>
+
+<!-- cash-crops -->
+<div class="product-heading">
+    <h2 class="category">Cash Crops</h2>
+    <a href="/products/Cash crops" class="all-link">See all</a>
+</div>
+<div class="cards">
+
+<% for(let crop of cashCrop.slice(0,5)){ %>
+<div class="card" style="width: 18rem;">
+  <a href="/cashCrop/<%= crop._id %>" style="text-decoration: none; display: block;">
+    <div class="effects">
+  <img src= "<%= crop.image %>" class="card-img-top image" alt="...">
+  <div class="overlay">
+     <i class="fa-regular fa-heart icon"></i>
+     <i class="fa-solid fa-cart-shopping icon"></i>
+          </div>
+</div>
+  <div class="card-body">
+    <p class="card-text"><b><%= crop.title %></b><br><%= crop.quantity %> g</p>
+    
+    <div class="button" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    <p class="card-price" style="color: black;">&#8377;<%= crop.price ? crop.price.toLocaleString("en-IN") : "Price not available" %></p>
+    <button class="btn btn-outline-success add-cart">Add Cart</button>
+</div>
+  </div>
+</a>
+</div>
+<% } %>
+</div>
+
+<!-- Livestock and plantation -->
+<div class="product-heading">
+    <h2 class="category">Livestock and Plantation</h2>
+    <a href="/products/Livestock and Plantation" class="all-link">See all</a>
+</div>
+<div class="cards">
+
+<% for(let stock of liveStock.slice(0,5)){ %>
+<div class="card" style="width: 18rem;">
+  <a href="/spices/<%= stock._id %>" style="text-decoration: none; display: block;">
+    <div class="effects">
+  <img src= "<%= stock.image %>" class="card-img-top image" alt="...">
+  <div class="overlay">
+     <i class="fa-regular fa-heart icon"></i>
+     <i class="fa-solid fa-cart-shopping icon"></i>
+          </div>
+</div>
+  <div class="card-body">
+    <p class="card-text"><b><%= stock.title %></b><br><%= stock.quantity %> g</p>
+    
+    <div class="button" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    <p class="card-price" style="color: black;">&#8377;<%= stock.price ? stock.price.toLocaleString("en-IN") : "Price not available" %></p>
+    <button class="btn btn-outline-success add-cart">Add Cart</button>
+</div>
+  </div>
+</a>
+</div>
+<% } %>
+</div>
+
+<!-- cereals and grains -->
+<div class="product-heading">
+    <h2 class="category">Cereals and Grains</h2>
+    <a href="/products/Cereals and Grains" class="all-link">See all</a>
+</div>
+<div class="cards">
+
+<% for(let grain of cereal.slice(0,5)){ %>
+<div class="card" style="width: 18rem;">
+  <a href="/spices/<%= grain._id %>" style="text-decoration: none; display: block;">
+    <div class="effects">
+  <img src= "<%= grain.image %>" class="card-img-top image" alt="...">
+  <div class="overlay">
+     <i class="fa-regular fa-heart icon"></i>
+     <i class="fa-solid fa-cart-shopping icon"></i>
+          </div>
+</div>
+  <div class="card-body">
+    <p class="card-text"><b><%= grain.title %></b><br><%= grain.quantity %> g</p>
+    
+    <div class="button" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    <p class="card-price" style="color: black;">&#8377;<%= grain.price ? grain.price.toLocaleString("en-IN") : "Price not available" %></p>
+    <button class="btn btn-outline-success add-cart">Add Cart</button>
+</div>
+  </div>
+</a>
+</div>
+<% } %>
+</div>
+
+<!-- Legumes and Oil Seeds -->
+<div class="product-heading">
+    <h2 class="category">Legumes and Oil Seeds</h2>
+    <a href="/products/Legumes and Oil Seeds" class="all-link">See all</a>
+</div>
+<div class="cards">
+
+<% for(let seed of legumes.slice(0,5)){ %>
+<div class="card" style="width: 18rem;">
+  <a href="/legumes/<%= seed._id %>" style="text-decoration: none; display: block;">
+    <div class="effects">
+  <img src= "<%= seed.image %>" class="card-img-top image" alt="...">
+  <div class="overlay">
+     <i class="fa-regular fa-heart icon"></i>
+     <i class="fa-solid fa-cart-shopping icon"></i>
+          </div>
+</div>
+  <div class="card-body">
+    <p class="card-text"><b><%= seed.title %></b><br><%= seed.quantity %> g</p>
+    
+    <div class="button" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    <p class="card-price" style="color: black;">&#8377;<%= seed.price ? seed.price.toLocaleString("en-IN") : "Price not available" %></p>
+    <button class="btn btn-outline-success add-cart">Add Cart</button>
+</div>
+  </div>
+</a>
+</div>
+<% } %>
+</div>
+
+<!-- Fruits and Vegetables -->
+<div class="product-heading">
+    <h2 class="category">Fruits and Vegetables</h2>
+    <a href="/products/Fruits and Vegetables" class="all-link">See all</a>
+</div>
+<div class="cards">
+
+<% for(let fruit of fruits.slice(0,5)){ %>
+<div class="card" style="width: 18rem;">
+  <a href="/spices/<%= fruit._id %>" style="text-decoration: none; display: block;">
+    <div class="effects">
+  <img src= "<%= fruit.image %>" class="card-img-top image" alt="...">
+  <div class="overlay">
+     <i class="fa-regular fa-heart icon"></i>
+     <i class="fa-solid fa-cart-shopping icon"></i>
+          </div>
+</div>
+  <div class="card-body">
+    <p class="card-text"><b><%= fruit.title %></b><br><%= fruit.quantity %> g</p>
+    
+    <div class="button" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    <p class="card-price" style="color: black;">&#8377;<%= fruit.price ? fruit.price.toLocaleString("en-IN") : "Price not available" %></p>
+    <button class="btn btn-outline-success add-cart">Add Cart</button>
+</div>
+  </div>
+</a>
+</div>
+<% } %>
+</div>
+
+</body>
