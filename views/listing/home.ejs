@@ -14,7 +14,7 @@
                 <div class="content">
                     <div class="name"><%= image.title %></div>
                     <div class="des"> <%= image.description %></div>
-                    <button class="button">Buy Products</button>
+                    <button class="button"><a href="/products/<%= image.category %>">Buy Products</a></button> 
                 </div>
             </div>
         <% } %>
