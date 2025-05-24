@@ -1,0 +1,267 @@
+<% layout("/layout/boilerplate.ejs") %>
+<style>
+    .cartBox{
+        background-color: #eaeaea;
+        border-radius: 8px;
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .cartSection {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        border-bottom: 1px solid #ccc;
+    }
+    .cart-image{
+        height: 60px;
+        width: 60px;
+        border-radius: 10px;
+        margin-left: 5px;
+        margin-top: 15px;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+    .details {
+        flex: 1;
+        margin-left: 20px;
+        font-size: larger;
+    }
+    .input_button{
+        height: 70px;
+        width: 100px;
+        border-radius: 40%;
+    }
+    .shape{
+        border-radius: 40%;
+    }
+    .price{
+        padding-right: 10px;
+        white-space: nowrap;
+        padding-left: 10px;
+    }
+    .head{
+        padding-left: 130px;
+        margin-bottom: 20px;
+    }
+    .spin{
+        border-radius: 100%;
+    }
+    .spinner {
+        display: flex;
+        align-items: center;
+        text-align: left;
+        gap: 5px;
+        margin-right: 15px;
+    }
+    .bill_order{
+        justify-content: space-between;
+        align-items: center;
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 35px;
+        font-size: 18px;
+    }
+    .div1{
+        display: flex;
+        justify-content: space-between;
+    }
+    .paybutton{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        left: 39%;
+        padding: 5px 30px 5px 30px;
+        border-radius: 10px;
+        background-color: #087122;
+        color: #fff;
+        font-size: x-large;
+    }
+    .paybutton:hover{
+        box-shadow: 2px 5px 7px 2px black;
+    }
+    .cartImage{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+</style>
+<% if(user.cart.length == 0){ %>
+    <h1 class="head">Your cart is empty</h1>
+    <div class="cartBox">
+        <div class="cartImage">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/056/256/423/small_2x/shopping-cart-on-mobile-phone-png.png" alt="Empty Cart" style="width: 400px; height: 400px; margin-left: 20px;">
+            </div>
+        <div class="cartSection">
+            <div class="details">No items in your cart</div>
+        </div>
+    </div>
+    <!-- <a href="/products" class="btn btn-outline-success add-cart" style="margin-left: 40%; margin-top: 20px;">Add Products</a> -->
+    <% } %>
+<% if(user.cart.length > 0){ %>
+<h1 class="head">Review your order</h1>
+<div class="cartBox">
+    <% for(let i = 0; i < user.cart.length; i++) { %>
+    <% let users = user.cart[i]; %>
+    <div class="cartSection" data-id="<%= users._id %>">
+        
+        <div>
+            <img src="<%= users.image %>" class="cart-image">
+        </div>
+        <div class="details">
+            <div><%= users.title %></div>
+            <div><%= users.quantity %>gm</div>
+        </div>
+        <div class="spinner">
+            <button type="button" class="btn btn-outline-success btn-sm spin decrement" data-id="<%= users._id %>"><</button>
+            <span class="quantity-value" data-id="<%= users._id %>">1</span>
+            <button type="button" class="btn btn-outline-success btn-sm spin increment" data-id="<%= users._id %>">></button>
+        </div>
+        <div>
+            <div class="price"><b>&#8377;<span class="item-price" data-price="<%= users.price %>"><%= users.price ? users.price.toLocaleString("en-IN") : "Price not available" %></span></b></div>
+        </div>
+    </div>
+    <% } %>
+</div>
+
+<h1 class="head">Bill Details</h1>
+<div class="bill_order">
+    <div class="div1">
+        <div>Total bill</div>
+        <div class="priceTotal"><span id="totalPrice">&#8377;0</span></div>
+    </div>
+    <div class="div1">
+        <div>Handling fee</div>
+        <div>&#8377;9.80</div>
+    </div>
+    <div class="div1">
+        <div>Delivery Partner fee</div>
+        <div><span id="deliverfee">&#8377;0</span></div>
+    </div>
+    <div class="div1">
+        <div>GST and charges</div>
+        <div>&#8377;1.76</div>
+    </div>
+    <hr>
+    <div class="div1">
+        <div><b>Total</b></div>
+        <div><b id="totalmoney"></b></div>
+    </div>
+</div>
+<form method="get" action="/payment" onsubmit="return updateHiddenInput()">
+    <!-- Hidden input to store the amount -->
+    <input type="hidden" id="hiddenAmount" name="total" />
+  
+    <div>
+      <button class="paybutton">
+        Proceed to pay: <b id="totalamount"></b>
+      </button>
+    </div>
+  </form>
+<%}%>
+
+<script>
+    // Initialize cart from the DOM (not from initial JSON)
+    function getCurrentCart() {
+        const items = [];
+        document.querySelectorAll('.cartSection').forEach(item => {
+            const index = item.getAttribute('data-id');
+            const price = parseFloat(item.querySelector('.item-price').getAttribute('data-price'));
+            const quantity = parseInt(item.querySelector('.quantity-value').textContent);
+            items.push({ price, quantity });
+        });
+        return items;
+    }
+
+    // Calculate initial total
+    updateTotal();
+
+    // Quantity change handlers
+    document.querySelectorAll('.increment').forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            const quantityElement = document.querySelector(`.quantity-value[data-id="${id}"]`);
+            let quantity = parseInt(quantityElement.textContent);
+            quantity++;
+            quantityElement.textContent = quantity;
+            updateTotal();
+        });
+    });
+
+    document.querySelectorAll('.decrement').forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            const cartItem = document.querySelector(`.cartSection[data-id="${id}"]`);
+            const quantityElement = document.querySelector(`.quantity-value[data-id="${id}"]`);
+            let quantity = parseInt(quantityElement.textContent);
+            
+            if (quantity > 1) {
+                quantity--;
+                quantityElement.textContent = quantity;
+                updateTotal();
+            } else if (quantity === 1) {
+                if (confirm('Remove this item from your cart?')) {
+    fetch(`/cart/delete/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => {
+      if (!res.ok) {
+        console.error('Failed to delete item from cart');
+        return res.json().then(err => { throw new Error(err.message); });
+      }
+      return res.json();
+    })
+    .then(data => {
+      cartItem.remove(); // Remove from DOM
+      updateTotal(); // Recalculate
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Failed to remove item. Please try again.');
+    });
+  }
+            }
+        });
+    });
+var total = 0;
+    function updateTotal() {
+        const currentCart = getCurrentCart();
+        let subtotal = 0;
+
+        // Calculate subtotal from visible items
+        currentCart.forEach(item => {
+            subtotal += item.price * item.quantity;
+        });
+
+        document.getElementById('totalPrice').textContent = `₹${subtotal.toLocaleString("en-IN")}`;
+        
+        // Update delivery fee
+        let deliverfee = 0;
+        if (subtotal > 499) {
+            document.getElementById('deliverfee').textContent = "Free";
+        } else {
+            document.getElementById('deliverfee').textContent = "₹30.00";
+            deliverfee = 30;
+        }
+
+        // Calculate final total
+        total = subtotal + 1.76 + 9.80 + deliverfee;
+        document.getElementById('totalmoney').textContent = `₹${total.toLocaleString("en-IN")}`;
+        document.getElementById('totalamount').textContent = `₹${total.toLocaleString("en-IN")}`;
+    }
+    function updateHiddenInput() {
+        updateTotal();
+        const formattedTotal = total.toFixed(2);
+  document.getElementById('hiddenAmount').value = formattedTotal; // raw number value
+  return true; // allow form to submit
+}
+// Run updateTotal when the page loads
+document.addEventListener('DOMContentLoaded', updateTotal);
+</script>

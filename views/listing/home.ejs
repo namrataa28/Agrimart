@@ -1,9 +1,5 @@
 
 <% layout("/layout/boilerplate.ejs") %>
-<style>
-   
-
-</style>
 
 <body>
    
@@ -49,7 +45,9 @@
         
         <div class="button" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
         <p class="card-price" style="color: black;">&#8377;<%= spices.price ? spices.price.toLocaleString("en-IN") : "Price not available" %></p>
+        <form action="/product/<%= spices._id%>" method="get">
         <button class="btn btn-outline-success add-cart">Add Cart</button>
+      </form>
     </div>
       </div>
     </a>
@@ -79,7 +77,9 @@
     
     <div class="button" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
     <p class="card-price" style="color: black;">&#8377;<%= crop.price ? crop.price.toLocaleString("en-IN") : "Price not available" %></p>
+    <form action="/product/<%=crop._id%> " method="get">
     <button class="btn btn-outline-success add-cart">Add Cart</button>
+  </form>
 </div>
   </div>
 </a>
@@ -109,7 +109,9 @@
     
     <div class="button" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
     <p class="card-price" style="color: black;">&#8377;<%= stock.price ? stock.price.toLocaleString("en-IN") : "Price not available" %></p>
+    <form action="/product/<%= stock._id %>" method="get">
     <button class="btn btn-outline-success add-cart">Add Cart</button>
+  </form>
 </div>
   </div>
 </a>
@@ -139,7 +141,9 @@
     
     <div class="button" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
     <p class="card-price" style="color: black;">&#8377;<%= grain.price ? grain.price.toLocaleString("en-IN") : "Price not available" %></p>
+    <form action="/product/<%= grain._id %>" method="get">
     <button class="btn btn-outline-success add-cart">Add Cart</button>
+  </form>
 </div>
   </div>
 </a>
@@ -169,7 +173,9 @@
     
     <div class="button" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
     <p class="card-price" style="color: black;">&#8377;<%= seed.price ? seed.price.toLocaleString("en-IN") : "Price not available" %></p>
+    <form action="/product/<%= seed._id%>" method="get">
     <button class="btn btn-outline-success add-cart">Add Cart</button>
+  </form>
 </div>
   </div>
 </a>
@@ -199,7 +205,9 @@
     
     <div class="button" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
     <p class="card-price" style="color: black;">&#8377;<%= fruit.price ? fruit.price.toLocaleString("en-IN") : "Price not available" %></p>
+    <form action="/product/<%=fruit._id%>" method="get">
     <button class="btn btn-outline-success add-cart">Add Cart</button>
+  </form>
 </div>
   </div>
 </a>

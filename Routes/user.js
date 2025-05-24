@@ -32,22 +32,38 @@ router.get("/login",(req,res) => {
 })
 
 router.post("/login",saveRedirectUrl, passport.authenticate("local",{failureRedirect:"/login", failureFlash:true}),(req,res) => {
-  
+
     req.flash("success","Logged in successfully");
     res.redirect("/");
 })
 
 router.get("/logout",(req,res) => {
     req.logout((err) => {
-      if(err){
+    if(err){
         return next(err);
-      }else{
+    }else{
         req.flash("success","Logged out successfully");
         res.redirect("/");
-      }
+    }
     });
-   
 })
+
+router.delete('/remove', async (req, res) => {
+    try {
+        const { productId } = req.body;
+        const userId = req.user._id;
+
+        await User.updateOne(
+            { _id: userId },
+            { $pull: { cart: { productId } } }
+        );
+
+        res.status(200).json({ success: true });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to remove item" });
+    }
+});
 
 module.exports = router;
 

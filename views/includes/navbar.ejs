@@ -39,8 +39,8 @@
             <a class="nav-link name" href="/"><b>AgriMart</b></a>
           </div>
           <div class="navbar-nav ms-auto">
-            <form class="d-flex" role="search">
-              <input class="form-control me-2 search-inp" type="search" placeholder="Search Products" >
+            <form class="d-flex" role="search" action="/search" method="GET">
+              <input class="form-control me-2 search-inp" type="search" name="q" placeholder="Search Products" >
               <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
             </form>
           </div>
@@ -48,14 +48,14 @@
            
 
             <% if(!currentUser){ %>
-              <a class="nav-link " href="/signup"><b>Sign Up</b></a>
-            <a class="nav-link" href="/login"><b>Login</b> </a>
+              <a class="nav-link " href="/user/signup"><b>Sign Up</b></a>
+            <a class="nav-link" href="/user/login"><b>Login</b> </a>
             <% } %>
             <% if(currentUser){ %>
-                <a class="nav-link" href="/listing/new">List Your Product</a>
-            <a class="nav-link" href="/logout"><b>LogOut</b></a>
+                <!-- <a class="nav-link" href="/listing/new">List Your Product</a> -->
+            <a class="nav-link" href="/user/logout"><b>LogOut</b></a>
             <a class="nav-link" href="/cart"><i class="fa-solid fa-shopping-cart position-relative"></i> Cart
-            <span class="position-absolute top-10 start-95 translate-middle p-2 bg-success border border-light rounded-circle">
+            <span class="position-absolute top-10 start-95 translate-middle badge rounded-pill bg-success"><% if (currentUser) { %> <%= currentUser.cart.length %> <% } else { %> 0 <% } %>
             
             </span>
           </a>

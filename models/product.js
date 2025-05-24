@@ -27,7 +27,18 @@ const ProductSchema = new Schema({
         type:String,
         enum:['Fruits and Vegetables','Legumes and Oil Seeds','Cereals and Grains','Livestock and Plantation','Cash crops','Spices'],
         required:true
-    }
+    },
+    geometry:{
+        type: {
+          type: String, // Don't do `{ location: { type: String } }`
+          enum: ['Point'], // 'location.type' must be 'Point'
+          required: true
+        },
+        coordinates: {
+          type: [Number],
+          required: true
+        }
+      }
 })
 
  const products = mongoose.model('products',ProductSchema);

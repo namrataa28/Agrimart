@@ -1,0 +1,29 @@
+ <% layout("/layout/boilerplate.ejs") %> 
+ <style>
+    .searchResult{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+ </style>
+<div class="searchResult">
+   <% Product.forEach(function(Products){ %>
+<div class="card" style="width: 18rem; margin-left: 10px;">
+  <img src="<%= Products.image %>"  class="card-img-top image" alt="...">
+  <div class="card-body">
+    <p class="card-text"><b><%= Products.title %></b><br><%= Products.quantity %> g</p>
+    
+    <div class="button" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    <p class="card-price" style="color: black;">&#8377;<%= Products.price ? Products.price.toLocaleString("en-IN") : "Price not available" %></p>
+    <form action="/product/<%=Products._id%>" method="get">
+    <button class="btn btn-outline-success cartButton">Add Cart</button>
+  </form>
+</div>
+  </div>
+</div>
+  <%  }) %>
+
+</div>
+ 

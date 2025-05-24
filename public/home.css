@@ -14,13 +14,11 @@ body{
 }
 
 .container{
-    position: relative;/*absolute*/
-    top: 0%; /*50%*/
-    left: 0%; /*50%*/
-    /* transform: translate(-50%, -50%); */
-    /* top: calc(50% + 50px); chatgpt */
-    width: 1500px; /*100%*/
-    height: 600px; /*100%*/
+    position: relative;
+    top: 0%; 
+    left: 0%; 
+    width: 1500px; 
+    height: 600px; 
     background: #f5f5f5;
     box-shadow: 0 30px 50px #dbdbdb;
 }
@@ -49,7 +47,7 @@ body{
     height: 100%;
 }
 
-.slide .item:nth-child(3){
+ .slide .item:nth-child(3){
     left: 50%;
 }
 .slide .item:nth-child(4){
@@ -63,7 +61,7 @@ body{
 .slide .item:nth-child(n+6){
     left: calc(50% + 660px);
     opacity: 0;
-}
+} 
 
 .item .content{
     position: absolute;
@@ -166,7 +164,7 @@ display: block;
    margin-bottom: 15px;
    padding-bottom:20px ;
 }
-.btn:hover{
+ .btn:hover{
     background-color: #087122;
     color: #fff;
 }
@@ -185,7 +183,7 @@ display: block;
 }
 .container{
     flex: 1;
-}
+} 
 
 /*transition effect */
 .overlay {
@@ -224,4 +222,17 @@ display: block;
 .card-text{
     color: black;
     font-size: large;
+}
+
+/* map styling */
+#map{
+    height: 400px;
+    width: 80vh;
+}
+.map_featuring{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

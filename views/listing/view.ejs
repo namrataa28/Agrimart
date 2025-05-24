@@ -74,7 +74,9 @@
     
     <div class="button" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
     <p class="card-price" style="color: black;">&#8377;<%= product.price ? product.price.toLocaleString("en-IN") : "Price not available" %></p>
+    <form action="/product/<%= product._id%>" method="get">
     <button class="btn btn-outline-success add-cart">Add Cart</button>
+  </form>
 </div>
   </div>
 </a>

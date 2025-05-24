@@ -1,3 +1,4 @@
+const { ref } = require('joi');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const pasportLocalMongoose = require('passport-local-mongoose');
@@ -18,7 +19,12 @@ const userSchema = new Schema({
         type:String,
         enum:['Farmer','Buyer'],
         required:true,
-    }
+    },
+    cart:[{
+      type:mongoose.Schema.Types.ObjectId,
+      default:[],
+      ref:"products",
+    }]
     //we don't need to add password field here because passport-local-mongoose will add it automatically
 });
 

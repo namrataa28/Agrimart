@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .thank-you-container {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 16px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .thank-you-heading {
+            font-size: 2.5rem;
+            color: #2e7d32;
+            margin: 0 0 1.5rem 0;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .thank-you-heading::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            bottom: -10px;
+            left: 25%;
+            background: linear-gradient(90deg, #4caf50, #8bc34a);
+            border-radius: 2px;
+        }
+
+        .thank-you-subtext {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .checkmark {
+            font-size: 5rem;
+            color: #4caf50;
+            margin-bottom: 1.5rem;
+            animation: bounce 1s ease;
+        }
+
+        .decoration-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .circle-1 {
+            width: 150px;
+            height: 150px;
+            background: #4caf50;
+            top: -50px;
+            right: -50px;
+        }
+
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            background: #2196f3;
+            bottom: -80px;
+            left: -80px;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+
+        @media (max-width: 768px) {
+            .thank-you-heading {
+                font-size: 2rem;
+            }
+            .thank-you-container {
+                width: 90%;
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <div class="decoration-circle circle-1"></div>
+        <div class="decoration-circle circle-2"></div>
+        
+        <div class="checkmark">✓</div>
+        <h2 class="thank-you-heading">Thank You for choosing us!</h2>
+        <p class="thank-you-subtext">We appreciate your trust in our services. Your support helps us grow and improve.</p>
+    </div>
+</body>
+</html>
